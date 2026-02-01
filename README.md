@@ -1,1 +1,2 @@
-README file!
+DEPENDENCIES:
+1. This program relies on `NetworkX`, a library that aids in the parsing and writing of `.gml` files. You must install this prior to running any commands for the project. To install: `pip install networkx[default]`
