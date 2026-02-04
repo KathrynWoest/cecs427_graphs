@@ -7,6 +7,7 @@ def parse_graph(file_name):
     Output: NetworkX graph of the submitted graph from the file"""
     
     try:
+        # reads .gml file and parses it into the graph
         submitted_graph = nx.read_gml(file_name)
         return submitted_graph
     
@@ -21,19 +22,10 @@ def save_graph(graph, file_name):
     Output: none"""
 
     try:
+        # creates output file and writes graph to it
         nx.write_gml(graph, file_name)
 
     except Exception as e:
         print("Program quit due to an error in creating the save file and saving the graph.")
         print("Provided error:", e)
         sys.exit(1)
-
-
-def main():
-    args = sys.argv
-    file_path = args[1]
-    og_graph = parse_graph(file_path)
-    print(og_graph.nodes)
-    save_graph(og_graph, "temp_save.gml")
-
-main()
