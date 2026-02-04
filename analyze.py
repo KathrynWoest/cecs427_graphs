@@ -57,4 +57,4 @@ def analyze(graph):
                 highlight_edges.update(edges)
 
 
-    return G, isolated_nodes, highlight_edges
+    return G, isolated_nodes, highlight_edges, components
