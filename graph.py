@@ -1,4 +1,6 @@
 import sys
+import generator as gen
+import file_io as fio
 
 def main():
     # get arguments from command line and initialize BFS node list, the iterator to traverse arguments, and the end of the argument list
@@ -15,13 +17,13 @@ def main():
         # parse in graph from given .gml file
         if args[1] == "--input":
             input_file = args[2]
-            # TODO: call file parser from file_io: user_graph = fio.parse_graph(input_file)
+            user_graph = fio.parse_graph(input_file)
             iterator += 2
         # generate graph with given n and c
         elif end > 3 and args[1] == "--create_random_graph":
             n = args[2]
             c = args[3]
-            # TODO: call graph generator from generator: user_graph = gen.generate(n, c)
+            user_graph = gen.generation(n, c)
             iterator += 3
         # if there are 3 arguments and we aren't inputting a file, then not enough arguments to generate graph. terminate program.
         else:
@@ -62,7 +64,7 @@ def main():
             
             output_file = args[iterator + 1]
             iterator += 2
-            # TODO: call file output from file_io: fio.save_graph(user_graph, output_file)
+            fio.save_graph(user_graph, output_file)
         
         # check to see if there are extra arguments provided. if so, print them so the user can see.
         if iterator < end:

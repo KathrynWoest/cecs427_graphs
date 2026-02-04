@@ -9,14 +9,14 @@ def generation(n, c):
 
     try:
         node_count = int(n)
-        edge_const = int(c)
+        edge_const = float(c)
 
         # calculate probability of edges occuring with the given equation, then generate the graph
         edge_prob = edge_const * (math.log(node_count) / node_count)
         generated_graph = nx.erdos_renyi_graph(node_count, edge_prob)
 
     except ValueError as ve:
-        print("Program terminated because graph generation input(s) 'n' and/or 'c' are not integers. Error message:", ve)
+        print("Program terminated because graph generation input(s) 'n' and/or 'c' are not numbers. Error message:", ve)
         sys.exit(1)
 
     except Exception as e:
