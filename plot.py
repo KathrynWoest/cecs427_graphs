@@ -57,8 +57,8 @@ def plot(graph, isolated_nodes, highlight_edges):
             edge["color"] = "#f4a261"
             edge["width"] = 3
         else:
-            edge["color"] = "#d0d0d0"
-            edge["width"] = 1
+            edge["color"] = "#d0d0d000"
+            edge["width"] = 2
 
         edge["smooth"] = {"type": "continuous"}
 
@@ -101,8 +101,28 @@ def plot(graph, isolated_nodes, highlight_edges):
 
     net.toggle_physics(False)
 
-    # Render
-    net.show("graph.html", notebook=False)
+    # Adding title to graph
+    title_html = """
+    <h2 id="graph-title" style="
+        text-align:center;
+        font-family:Arial, sans-serif;
+        color:#222;
+        margin: 10px 0 20px 0;
+    ">
+    Graph Visualization Highlighting Connected Components,
+    Shortest Paths, and Isolated Nodes
+    </h2>
+    """
+    net.html = title_html + net.html
+
+    with open("graph.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    if 'id="graph-title"' not in html:
+        html = html.replace("<body>", "<body>\n" + title_html, 1)
+
+    with open("graph.html", "w", encoding="utf-8") as f:
+        f.write(html)
 
 
 # ###### Testing #######
@@ -140,7 +160,7 @@ def plot(graph, isolated_nodes, highlight_edges):
 
 #     # Loading the graph
 #     #G = nx.read_gml(graph)
-#     G = graph
+#     G = graph # test graph
 
 #     # Looking for connected components
 #     components = list(nx.connected_components(G))
@@ -194,7 +214,6 @@ def plot(graph, isolated_nodes, highlight_edges):
 #                 edges = list(zip(path[:-1], path[1:]))
 #                 highlight_edges.update(edges)
 
-
 #     return {
 #         "graph": G,
 #         "components": components,            # list of sets
@@ -204,9 +223,15 @@ def plot(graph, isolated_nodes, highlight_edges):
 
 
 # test_graph = make_test_graph()
-# results = analyze(test_graph)
+# results = analyze(test_graph)   # data needed for visualization
 
-# # nx.write_gml(results["graph"], "graph.gml")     to export to .gml
+# # Adding title to graph metadata
+# results["graph"].graph["title"] = (
+#     "Graph Visualization Highlighting Connected Components, "
+#     "Shortest Paths, and Isolated Nodes"
+# )
+
+# nx.write_gml(results["graph"], "graph.gml")     # to export to .gml
 
 # plot(
 #     results["graph"],
