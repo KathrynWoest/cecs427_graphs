@@ -2,6 +2,23 @@ import networkx as nx
 from pyvis.network import Network
 
 def plot(graph, isolated_nodes, highlight_edges):
+    """
+    Visualize a NetworkX graph using PyVis with customized styling and
+    an interactive legend.
+
+    Args:
+    graph (networkx.Graph) : the graph to visualize
+    isolated_nodes (list) : a list of nodes that are isolated (degree zero) in the graph
+    highlight_edges (set of tuples) : a set of edges (u, v) that should be visually emphasized,
+        representing shortest-path edges.
+
+    Notes
+    -----
+    - This function generates an interactive HTML file using PyVis.
+    - Visualization styling does not modify the underlying graph structure.
+    - The resulting visualization is saved as 'graph.html'.
+    """
+
     net = Network(
         height="750px",
         width="100%",
@@ -104,6 +121,23 @@ def make_test_graph():
     return G
 
 def analyze(graph):
+    """
+    Analyze the structural properties of a NetworkX graph and compute
+    data for visualization.
+
+    Args:
+        graph (networkx.Graph) : the input graph to analyze
+
+    Returns:
+        dict: 
+            A dictionary containing:
+            - 'graph' (networkx.Graph) : the original graph
+            - 'components' (list of sets) : each set contains the nodes in one connected component
+            - 'isolated_nodes' (list) : a list of nodes with no incident edges
+            - 'highlight_edges' (set of tuples) : a set of edges (u, v) that appear in at least 
+                one shortest path computed via breadth-first search / Dijkstra
+    """
+    
     # Loading the graph
     #G = nx.read_gml(graph)
     G = graph
