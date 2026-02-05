@@ -1,8 +1,26 @@
 import networkx as nx
 
 def analyze(graph):
+    """
+    Analyze the structural properties of a NetworkX graph and compute
+    data for visualization.
+
+    Args:
+        graph (networkx.Graph) : the input graph to analyze
+
+    Returns:
+        dict: 
+            A dictionary containing:
+            - 'graph' (networkx.Graph) : the original graph
+            - 'components' (list of sets) : each set contains the nodes in one connected component
+            - 'isolated_nodes' (list) : a list of nodes with no incident edges
+            - 'highlight_edges' (set of tuples) : a set of edges (u, v) that appear in at least 
+                one shortest path computed via breadth-first search / Dijkstra
+    """
+    
     # Loading the graph
-    G = nx.read_gml(graph)
+    #G = nx.read_gml(graph)
+    G = graph
 
     # Looking for connected components
     components = list(nx.connected_components(G))
@@ -57,4 +75,9 @@ def analyze(graph):
                 highlight_edges.update(edges)
 
 
-    return G, isolated_nodes, highlight_edges, components
+    return {
+        "graph": G,
+        "components": components,            # list of sets
+        "isolated_nodes": isolated_nodes,    # list
+        "highlight_edges": highlight_edges,  # set of tuples
+    }
