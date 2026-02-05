@@ -88,7 +88,7 @@ def plot(graph, isolated_nodes, highlight_edges):
     net.show("graph.html", notebook=False)
 
 
-### Testing ####
+###### Testing #######
 def make_test_graph():
     G = nx.Graph()
 
