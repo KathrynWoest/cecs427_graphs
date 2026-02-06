@@ -106,7 +106,7 @@ def plot(graph, isolated_nodes, highlight_edges=(), bfs_called=False):
 
     net.toggle_physics(False)
 
-    # Generate HTML FIRST
+    # Generate HTML
     net.write_html("graph.html", open_browser=False)
 
     # Post-process HTML to add title
