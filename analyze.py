@@ -19,7 +19,7 @@ def analyze(graph):
     """
     
     # Loading the graph
-    G = nx.read_gml(graph)
+    G = graph
 
     # Looking for connected components
     components = list(nx.connected_components(G))

@@ -32,7 +32,7 @@ def save_graph(graph, file_name, bfs_paths={}, analysis={}):
         if len(bfs_paths) > 0:
             # if there are BFS paths to save, save them
             for node_id, path in bfs_paths.items():
-                graph.nodes[node_id]["Calculated BFS paths"] = path
+                graph.nodes[node_id]["Calculated_BFS_paths"] = str(path)
         if len(analysis) > 0:
             # if there's analysis to save, save it
 
@@ -41,15 +41,15 @@ def save_graph(graph, file_name, bfs_paths={}, analysis={}):
             component_id = 0
             for component in components:
                 for node in component:
-                    node["Component ID"] = component_id
-                    node["Other nodes in component"] = [x for x in component if x != node]
-                    node["Node is isolated"] = False
+                    graph.nodes[node]["Component_ID"] = component_id
+                    graph.nodes[node]["Other_component_nodes"] = str([x for x in component if x != node])
+                    graph.nodes[node]["Node_is_isolated"] = "False"
                 component_id += 1
 
-            # add isolated node information
+            # overwrite "Node_is_isolated" if the node's isolated
             isolated = analysis["isolated_nodes"]
             for node in isolated:
-                node["Node is isolated"] = True
+                graph.nodes[node]["Node_is_isolated"] = "True"
 
     except Exception as e:
         print("Program quit due to an error in saving analysis to the graph.")
