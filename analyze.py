@@ -19,8 +19,7 @@ def analyze(graph):
     """
     
     # Loading the graph
-    #G = nx.read_gml(graph)
-    G = graph
+    G = nx.read_gml(graph)
 
     # Looking for connected components
     components = list(nx.connected_components(G))
@@ -50,6 +49,18 @@ def analyze(graph):
     density = nx.density(G)
     print("Graph density:", density)
 
+    # # Computing BFS shortest paths
+    # bfs_roots = [next(iter(c)) for c in components]
+
+    # lengths, paths = nx.multi_source_dijkstra(graph, bfs_roots)
+
+    # # Marking edges that belong to any shortest path
+    # highlight_edges = set()
+    # for target, path in paths.items():
+    #     if len(path) > 1:
+    #         edges = zip(path[:-1], path[1:])
+    #         highlight_edges.update(edges)
+
     # Computing average shortest path length
     if nx.is_connected(G):
         avg_path_len = nx.average_shortest_path_length(G)
@@ -57,27 +68,49 @@ def analyze(graph):
     else:
         print("Graph is not connected; cannot compute average shortest path length.")
 
-    ## Data for plotting ##
-    # Computing BFS shortest paths from each root
-    bfs_roots = [next(iter(c)) for c in components]
-
-    shortest_paths = []
-    for root in bfs_roots:
-        lengths, paths = nx.single_source_dijkstra(G, root)  # works for weighted or unweighted
-        shortest_paths.append(paths)
-
-    # Marking edges that belong to any shortest path
-    highlight_edges = set()
-    for paths in shortest_paths:
-        for target, path in paths.items():
-            if len(path) > 1:
-                edges = list(zip(path[:-1], path[1:]))
-                highlight_edges.update(edges)
-
-
     return {
         "graph": G,
         "components": components,            # list of sets
         "isolated_nodes": isolated_nodes,    # list
-        "highlight_edges": highlight_edges,  # set of tuples
     }
+
+
+def multi_bfs(graph, start_nodes):
+    """
+    Perform independent BFS traversals from multiple starting nodes.
+
+    Each starting node generates its own BFS tree and set of shortest paths.
+    Traversals are independent and do not compete with one another.
+
+    Parameters:
+    graph (networkx.Graph) :
+        The graph on which BFS will be performed.
+    start_nodes (list) :
+        A list of starting nodes for BFS.
+
+    Returns:
+        dict:
+            A dictionary mapping each starting node to its BFS result:
+            {
+                start_node: {
+                    target_node: [path from start_node to target_node]
+                }
+            }
+
+    Raises
+    ------
+    ValueError
+        If a starting node is not present in the graph.
+    """
+
+    bfs_results = {}
+
+    for src in start_nodes:
+        if src not in graph:
+            raise ValueError(f"BFS start node {src} is not in the graph.")
+        
+        paths = nx.single_source_shortest_path(graph, src)
+
+        bfs_results[src] = paths
+
+    return bfs_results

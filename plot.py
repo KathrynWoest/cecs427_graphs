@@ -3,7 +3,7 @@ from pyvis.network import Network
 import os
 import webbrowser
 
-def plot(graph, isolated_nodes, highlight_edges, bfs_called=True):
+def plot(graph, isolated_nodes, highlight_edges=(), bfs_called=True):
     """
     Visualize a NetworkX graph using PyVis with customized styling and
     an interactive legend.
@@ -110,7 +110,7 @@ def plot(graph, isolated_nodes, highlight_edges, bfs_called=True):
     # Generate HTML FIRST
     net.write_html("graph.html", open_browser=False)
 
-    # ---- Post-process HTML to add title (safe) ----
+    # Post-process HTML to add title
     title_html = """
     <h2 id="graph-title" style="
         text-align:center;
