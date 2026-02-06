@@ -21,8 +21,8 @@ Completed By: Kathryn Woest (030131541) and Grace Flores (030169163)
 ## Implementation Description
 1. **Overall Program:** `graph.py` will read in or generate a graph, then check for arguments that call for BFS_searches, analysis, plotting, or writing to an output file in that order (even if they are in a different order in the `python graph.py` command)
 2. **graph.py:** `graph.py` checks for missing arguments and calls the necessary modules to execute the arguments. Although the usage of `if --command in args` is not the most efficient, the argument list will never be large enough for that to be an issue. Additionally, this allows for commands to be in any order and still be executed properly. Uses error handling to address missing arguments (including parameters to commands like the file names, n, c, a1, etc). Utilizes `if elif else` statements to iterate through possible commands and to properly call functions like `plot()` and `save_graph()` based on what analysis was completed
-3. **file_io.py:** 
-4. **generator.py:** 
+3. **file_io.py:** Reads in, parses, and writes out `.gml` files and tackles error handling for file type, reading/writing files, and saving analysis metadata to the graph itself. For the analysis metadata, it saves: BFS paths if the node was a starting node, the ID of the component the node belongs to, other nodes (or lack thereof) in the same component, and whether the node is isolated or not
+4. **generator.py:** Generates an Erdos-Renyi graph based on the provided values of n and c. Checks to ensure n is an integer and c is a float, then calculates p using c. Finally, generates the graph and uses error handling if the graph generation fails or n/c are the wrong type
 5. **analyze.py:** this file contains two functions: `analyze()` and `multi_bfs()`. `analyze()` takes in two parameters: `graph`, which is the graph  
 6. **plot.py:** 
 
