@@ -19,8 +19,8 @@ def main():
             input_file = args[2]
             user_graph = fio.parse_graph(input_file)
             iterator += 2
-        # generate graph with given n and c
-        elif end > 3 and args[1] == "--create_random_graph":
+        # generate graph with given n and c, override --input graph with --create graph
+        if end > 3 and args[1] == "--create_random_graph":
             n = args[2]
             c = args[3]
             user_graph = gen.generation(n, c)
