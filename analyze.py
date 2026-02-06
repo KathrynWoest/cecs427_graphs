@@ -74,7 +74,7 @@ def analyze(graph, analyze_called=False):
 
 def multi_bfs(graph, start_nodes):
     """
-    Perform independent BFS traversals from multiple starting nodes.
+    Perform independent BFS traversals from multiple starting nodes and plots each BFS tree.
 
     For each source node, this function:
     - Computes the BFS tree
