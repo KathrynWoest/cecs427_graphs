@@ -1,7 +1,7 @@
 import networkx as nx
 from pyvis.network import Network
 
-def plot(graph, isolated_nodes, highlight_edges):
+def plot(graph, isolated_nodes, highlight_edges=(), bfs_called=False):
     """
     Visualize a NetworkX graph using PyVis with customized styling and
     an interactive legend.
@@ -53,13 +53,17 @@ def plot(graph, isolated_nodes, highlight_edges):
         u, v = int(edge["from"]), int(edge["to"])
         highlighted = (u, v) in highlight_edges or (v, u) in highlight_edges
 
-        if highlighted:
-            edge["color"] = "#f4a261"
-            edge["width"] = 3
+        if bfs_called:
+            if highlighted:
+                edge["color"] = "#f4a261"
+                edge["width"] = 3
+            else:
+                edge["color"] = "#d0d0d000"
+                edge["width"] = 2
         else:
             edge["color"] = "#d0d0d000"
             edge["width"] = 2
-
+            
         edge["smooth"] = {"type": "continuous"}
 
     # Styled legend panel
@@ -114,6 +118,8 @@ def plot(graph, isolated_nodes, highlight_edges):
     </h2>
     """
     net.html = title_html + net.html
+
+    net.show("graph.html")
 
     with open("graph.html", "r", encoding="utf-8") as f:
         html = f.read()
