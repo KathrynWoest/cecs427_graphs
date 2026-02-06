@@ -8,14 +8,14 @@ Completed By: Kathryn Woest (030131541) and Grace Flores ()
 1. Clone this repo and open it on your IDE
 
 2. DEPENDENCIES: This program relies on two external libraries, which were cleared by the professor. To install them, ensure you are inside the project directory and run these commands:
-    a. **NetworkX**, a library that provides `.gml` file parsing and writing, graph support, and analysis functions. To install, run: `pip install networkx[default]`
-    b. **Pyvis**, a library that provides graph plotting. To install, run: `pip install pyvis`
+  a. **NetworkX**, a library that provides `.gml` file parsing and writing, graph support, and analysis functions. To install, run: `pip install networkx[default]`
+  b. **Pyvis**, a library that provides graph plotting. To install, run: `pip install pyvis`
 
 3. Run this program with: `python graph.py --input input_file.gml --create_random_graph n c --multi_BFS a1 a2 ... --analyze --plot --output output_file.gml`
-    a. `--create_random_graph` will override the `--input` command and use a generated graph over the provided file's graph
-    b. All arguments can be provided in any order. For example, `python graph.py --input input_file.gml --plot --analyze` will return the same results as `python graph.py --plot --analyze --input input_file.gml`
-    c. However, parameters to those arguments must follow the arguments. For example, `--multi_BFS` MUST be directly followed by all the starting nodes `a1, a2, ...` or they will be skipped and the program will throw an exception
-    d. With the exception of `--input` or `--create_random_graph`, all other commands are optional. For example, you could just generate and analyze a graph with no plotting, BFS searches, or writing to an output files
+  a. `--create_random_graph` will override the `--input` command and use a generated graph over the provided file's graph
+  b. All arguments can be provided in any order. For example, `python graph.py --input input_file.gml --plot --analyze` will return the same results as `python graph.py --plot --analyze --input input_file.gml`
+  c. However, parameters to those arguments must follow the arguments. For example, `--multi_BFS` MUST be directly followed by all the starting nodes `a1, a2, ...` or they will be skipped and the program will throw an exception
+  d. With the exception of `--input` or `--create_random_graph`, all other commands are optional. For example, you could just generate and analyze a graph with no plotting, BFS searches, or writing to an output files
 
 
 ## Implementation Description
