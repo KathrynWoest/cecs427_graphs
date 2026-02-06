@@ -145,7 +145,7 @@ def multi_bfs(graph, start_nodes):
 
 
         bfs_results[src] = {
-            "edges": set(highlight_edges),
+            "edges": highlight_edges,
             "distances": distances
         }
 
