@@ -127,6 +127,7 @@ def multi_bfs(graph, start_nodes):
     bfs_results = {}
 
     for src in start_nodes:
+        src = str(src)
         if src not in graph:
             raise ValueError(f"BFS start node {src} is not in the graph.")
         
