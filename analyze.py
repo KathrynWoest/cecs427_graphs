@@ -1,5 +1,7 @@
 import networkx as nx
 from pyvis.network import Network
+import os
+import webbrowser
 
 def analyze(graph, analyze_called=False):
     """
@@ -217,6 +219,32 @@ def multi_bfs(graph, start_nodes):
                 selectable=False
             )
 
-        net.show(f"bfs_tree_{src}.html")
+        # net.show(f"bfs_tree_{src}.html")
+        # Generate HTML FIRST
+        net.write_html(f"bfs_tree_{src}.html", open_browser=False)
+
+        # Post-process HTML to add title
+        title_html = f"""
+        <h2 id="graph-title" style="
+            text-align:center;
+            font-family:Arial, sans-serif;
+            color:#222;
+            margin: 10px 0 20px 0;
+        ">
+        BFS Tree (from {src})
+        </h2>
+        """
+
+        if os.path.exists(f"bfs_tree_{src}.html"):
+            with open(f"bfs_tree_{src}.html", "r", encoding="utf-8") as f:
+                html = f.read()
+
+            if 'id="graph-title"' not in html:
+                html = html.replace("<body>", "<body>\n" + title_html, 1)
+
+                with open(f"bfs_tree_{src}.html", "w", encoding="utf-8") as f:
+                    f.write(html)
+
+        webbrowser.open(f'bfs_tree_{src}.html')
 
     return bfs_results
