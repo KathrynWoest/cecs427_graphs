@@ -1,6 +1,7 @@
 import networkx as nx
 from pyvis.network import Network
 import os
+import webbrowser
 
 def plot(graph, isolated_nodes, highlight_edges, bfs_called=True):
     """
@@ -131,6 +132,8 @@ def plot(graph, isolated_nodes, highlight_edges, bfs_called=True):
 
             with open("graph.html", "w", encoding="utf-8") as f:
                 f.write(html)
+
+    webbrowser.open("graph.html")
 
 
 # ###### Testing #######
