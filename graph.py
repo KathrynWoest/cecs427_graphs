@@ -1,6 +1,8 @@
 import sys
 import generator as gen
 import file_io as fio
+import plot
+import analyze
 
 def main():
     # get arguments from command line and initialize BFS node list, the iterator to traverse arguments, and the end of the argument list
@@ -8,6 +10,8 @@ def main():
     multi_BFS_nodes = []
     iterator = 1
     end = len(args)
+    called_BFS = False
+    called_analysis = False
 
     # if there are less than 3 arguments, then not possible to do anything. terminate program.
     if end < 3:
@@ -31,12 +35,13 @@ def main():
 
         # make a list of all BFS nodes given and call the BFS function
         if iterator < end and args[iterator] == "--multi_BFS":
+            called_BFS = True
             remaining_args = args[iterator + 1:]
 
             for i in range(len(remaining_args)):
                 # check if the current argument is the next command and not another node. if it's the next command, stop iterating.
                 if "--" not in remaining_args[i]:
-                    multi_BFS_nodes.append(remaining_args[i])
+                    multi_BFS_nodes.append(int(remaining_args[i]))
                 else:
                     iterator += i + 1
                     break
@@ -44,17 +49,18 @@ def main():
             if len(multi_BFS_nodes) == 0:
                 raise Exception("Program was terminated because it was missing starting node(s) for the BFS analysis.")
             
-            # TODO: call BFS from analysis: result = BFS(user_graph, multi_BFS_nodes)
+            analysis = analyze.analyze(user_graph, called_BFS, called_analysis, multi_BFS_nodes)
         
         # call the analysis function
         if iterator < end and args[iterator] == "--analyze":
-            # TODO: call analysis from analysis: result = analysis(user_graph)
+            called_analysis = True
+            analysis = analyze.analyze(user_graph, called_BFS, called_analysis)
             iterator += 1
         
-        # call the visualization function
-        if iterator < end and args[iterator] == "--plot":
-            # TODO: call plot from visualization: result = visualization(user_graph)
-            iterator += 1
+            # call the visualization function if also called
+            if iterator < end and args[iterator] == "--plot":
+                plot.plot(user_graph, analysis["isolated_nodes"], analysis["highlight_edges"])
+                iterator += 1
         
         # call the output function
         if iterator < end and args[iterator] == "--output":
