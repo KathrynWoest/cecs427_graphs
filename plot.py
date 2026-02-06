@@ -13,6 +13,8 @@ def plot(graph, isolated_nodes, highlight_edges=(), bfs_called=False):
         isolated_nodes (list) : a list of nodes that are isolated (degree zero) in the graph
         highlight_edges (set of tuples) : a set of edges (u, v) that should be visually emphasized,
             representing shortest-path edges.
+        bfs_called (bool) : indicates whether or not BFS has been called so that the program 
+            knows whether to highlight shortest path edges.
 
     Notes:
     - This function generates an interactive HTML file using PyVis.
