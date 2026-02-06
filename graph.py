@@ -51,7 +51,7 @@ def main():
         # call the analysis function
         if "--analyze" in args:
             called_analysis = True
-            analysis = analyze.analyze(user_graph)
+            analysis = analyze.analyze(user_graph, called_analysis)
         
         # call the visualization function
         if "--plot" in args:
@@ -61,7 +61,7 @@ def main():
             elif not called_BFS and called_analysis:
                 plot.plot(user_graph, analysis["isolated_nodes"])
             elif called_BFS and not called_analysis:
-                analysis = analyze.analyze(user_graph, True)
+                analysis = analyze.analyze(user_graph)
                 plot.plot(user_graph, analysis["isolated_nodes"], shortest_paths, called_BFS)
         
         # call the output function
