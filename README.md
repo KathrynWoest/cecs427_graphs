@@ -1,5 +1,5 @@
 # CECS 427 Project 1: Graphs
-Completed By: Kathryn Woest (030131541) and Grace Flores ()
+Completed By: Kathryn Woest (030131541) and Grace Flores (030169163)
 
 
 ## Usage Instructions
@@ -23,8 +23,8 @@ Completed By: Kathryn Woest (030131541) and Grace Flores ()
 2. **graph.py:** `graph.py` checks for missing arguments and calls the necessary modules to execute the arguments. Although the usage of `if --command in args` is not the most efficient, the argument list will never be large enough for that to be an issue. Additionally, this allows for commands to be in any order and still be executed properly. Uses error handling to address missing arguments (including parameters to commands like the file names, n, c, a1, etc). Utilizes `if elif else` statements to iterate through possible commands and to properly call functions like `plot()` and `save_graph()` based on what analysis was completed
 3. **file_io.py:** 
 4. **generator.py:** 
-5. **analyze.py:** 
-6. **plot.py:**
+5. **analyze.py:** this file contains two functions: `analyze()` and `multi_bfs()`. `analyze()` takes in two parameters: `graph`, which is the graph  
+6. **plot.py:** 
 
 
 ## Example Commands and Outputs
