@@ -14,8 +14,7 @@ def plot(graph, isolated_nodes, highlight_edges=(), bfs_called=True):
     highlight_edges (set of tuples) : a set of edges (u, v) that should be visually emphasized,
         representing shortest-path edges.
 
-    Notes
-    -----
+    Notes:
     - This function generates an interactive HTML file using PyVis.
     - Visualization styling does not modify the underlying graph structure.
     - The resulting visualization is saved as 'graph.html'.
