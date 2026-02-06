@@ -3,7 +3,7 @@ from pyvis.network import Network
 import os
 import webbrowser
 
-def plot(graph, isolated_nodes, highlight_edges=(), bfs_called=True):
+def plot(graph, isolated_nodes, highlight_edges=(), bfs_called=False):
     """
     Visualize a NetworkX graph using PyVis with customized styling and
     an interactive legend.

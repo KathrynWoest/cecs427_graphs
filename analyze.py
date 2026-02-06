@@ -83,10 +83,8 @@ def multi_bfs(graph, start_nodes):
     Traversals are independent and do not compete with one another.
 
     Parameters:
-    graph (networkx.Graph) :
-        The graph on which BFS will be performed.
-    start_nodes (list) :
-        A list of starting nodes for BFS.
+    graph (networkx.Graph) : the graph on which BFS will be performed.
+    start_nodes (list) : a list of starting nodes for BFS.
 
     Returns:
         dict:
@@ -97,10 +95,9 @@ def multi_bfs(graph, start_nodes):
                 }
             }
 
-    Raises
-    ------
-    ValueError
-        If a starting node is not present in the graph.
+    Raises:
+        ValueError
+            If a starting node is not present in the graph.
     """
 
     bfs_results = {}
