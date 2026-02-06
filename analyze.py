@@ -66,6 +66,18 @@ def analyze(graph, analyze_called=False):
     #         edges = zip(path[:-1], path[1:])
     #         highlight_edges.update(edges)
 
+    # # Computing BFS shortest paths
+    # bfs_roots = [next(iter(c)) for c in components]
+
+    # lengths, paths = nx.multi_source_dijkstra(graph, bfs_roots)
+
+    # # Marking edges that belong to any shortest path
+    # highlight_edges = set()
+    # for target, path in paths.items():
+    #     if len(path) > 1:
+    #         edges = zip(path[:-1], path[1:])
+    #         highlight_edges.update(edges)
+
     # Computing average shortest path length
     if nx.is_connected(G):
         avg_path_len = nx.average_shortest_path_length(G)

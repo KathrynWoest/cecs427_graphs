@@ -1,7 +1,9 @@
 import networkx as nx
 from pyvis.network import Network
+import os
+import webbrowser
 
-def plot(graph, isolated_nodes, highlight_edges):
+def plot(graph, isolated_nodes, highlight_edges=(), bfs_called=True):
     """
     Visualize a NetworkX graph using PyVis with customized styling and
     an interactive legend.
@@ -52,13 +54,17 @@ def plot(graph, isolated_nodes, highlight_edges):
         u, v = int(edge["from"]), int(edge["to"])
         highlighted = (u, v) in highlight_edges or (v, u) in highlight_edges
 
-        if highlighted:
-            edge["color"] = "#f4a261"
-            edge["width"] = 3
+        if bfs_called:
+            if highlighted:
+                edge["color"] = "#f4a261"
+                edge["width"] = 3
+            else:
+                edge["color"] = "#d0d0d000"
+                edge["width"] = 2
         else:
             edge["color"] = "#d0d0d000"
             edge["width"] = 2
-
+            
         edge["smooth"] = {"type": "continuous"}
 
     # Styled legend panel
@@ -100,7 +106,10 @@ def plot(graph, isolated_nodes, highlight_edges):
 
     net.toggle_physics(False)
 
-    # Adding title to graph
+    # Generate HTML FIRST
+    net.write_html("graph.html", open_browser=False)
+
+    # Post-process HTML to add title
     title_html = """
     <h2 id="graph-title" style="
         text-align:center;
@@ -112,16 +121,18 @@ def plot(graph, isolated_nodes, highlight_edges):
     Shortest Paths, and Isolated Nodes
     </h2>
     """
-    net.html = title_html + net.html
 
-    with open("graph.html", "r", encoding="utf-8") as f:
-        html = f.read()
+    if os.path.exists("graph.html"):
+        with open("graph.html", "r", encoding="utf-8") as f:
+            html = f.read()
 
-    if 'id="graph-title"' not in html:
-        html = html.replace("<body>", "<body>\n" + title_html, 1)
+        if 'id="graph-title"' not in html:
+            html = html.replace("<body>", "<body>\n" + title_html, 1)
 
-    with open("graph.html", "w", encoding="utf-8") as f:
-        f.write(html)
+            with open("graph.html", "w", encoding="utf-8") as f:
+                f.write(html)
+
+    webbrowser.open("graph.html")
 
 
 # ###### Testing #######
@@ -197,21 +208,17 @@ def plot(graph, isolated_nodes, highlight_edges):
 #         print("Graph is not connected; cannot compute average shortest path length.")
 
 #     ## Data for plotting ##
-#     # Computing BFS shortest paths from each root
+#     # Computing BFS shortest paths
 #     bfs_roots = [next(iter(c)) for c in components]
 
-#     shortest_paths = []
-#     for root in bfs_roots:
-#         lengths, paths = nx.single_source_dijkstra(G, root)  # works for weighted or unweighted
-#         shortest_paths.append(paths)
+#     lengths, paths = nx.multi_source_dijkstra(graph, bfs_roots)
 
 #     # Marking edges that belong to any shortest path
 #     highlight_edges = set()
-#     for paths in shortest_paths:
-#         for target, path in paths.items():
-#             if len(path) > 1:
-#                 edges = list(zip(path[:-1], path[1:]))
-#                 highlight_edges.update(edges)
+#     for target, path in paths.items():
+#         if len(path) > 1:
+#             edges = zip(path[:-1], path[1:])
+#             highlight_edges.update(edges)
 
 #     return {
 #         "graph": G,
