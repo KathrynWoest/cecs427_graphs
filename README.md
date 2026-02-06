@@ -8,8 +8,8 @@ Completed By: Kathryn Woest (030131541) and Grace Flores ()
 1. Clone this repo and open it on your IDE
 
 2. DEPENDENCIES: This program relies on two external libraries, which were cleared by the professor. To install them, ensure you are inside the project directory and run these commands:
-  a. **NetworkX**, a library that provides `.gml` file parsing and writing, graph support, and analysis functions. To install, run: `pip install networkx[default]`
-  b. **Pyvis**, a library that provides graph plotting. To install, run: `pip install pyvis`
+    1. **NetworkX**, a library that provides `.gml` file parsing and writing, graph support, and analysis functions. To install, run: `pip install networkx[default]`
+    2. **Pyvis**, a library that provides graph plotting. To install, run: `pip install pyvis`
 
 3. Run this program with: `python graph.py --input input_file.gml --create_random_graph n c --multi_BFS a1 a2 ... --analyze --plot --output output_file.gml`
   a. `--create_random_graph` will override the `--input` command and use a generated graph over the provided file's graph
