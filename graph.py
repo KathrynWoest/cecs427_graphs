@@ -71,6 +71,15 @@ def main():
                 raise Exception("Program was terminated because it was missing the output file name.")
             
             output_file = args[args.index("--output") + 1]
-            fio.save_graph(user_graph, output_file)
+
+            # check to see if any/which analysis needs to be saved with the graph
+            if called_BFS and called_analysis:
+                fio.save_graph(user_graph, output_file, shortest_paths, analysis)
+            elif not called_BFS and called_analysis:
+                fio.save_graph(user_graph, output_file, {}, analysis)
+            elif called_BFS and not called_analysis:
+                fio.save_graph(user_graph, output_file, shortest_paths)
+            else:
+                fio.save_graph(user_graph, output_file)
 
 main()
