@@ -133,8 +133,19 @@ def multi_bfs(graph, start_nodes):
         tree_edges = list(nx.bfs_edges(graph, src))
         distances = dict(nx.single_source_shortest_path_length(graph, src))
 
+        highlight_edges = set()
+
+        # Shortest paths from this source
+        paths = nx.single_source_shortest_path(graph, src)
+
+        # Extract edges from each shortest path
+        for path in paths.values():
+            if len(path) > 1:
+                highlight_edges.update(zip(path[:-1], path[1:]))
+
+
         bfs_results[src] = {
-            "edges": set(tree_edges),
+            "edges": set(highlight_edges),
             "distances": distances
         }
 
@@ -219,8 +230,7 @@ def multi_bfs(graph, start_nodes):
                 selectable=False
             )
 
-        # net.show(f"bfs_tree_{src}.html")
-        # Generate HTML FIRST
+        # Generate HTML
         net.write_html(f"bfs_tree_{src}.html", open_browser=False)
 
         # Post-process HTML to add title
