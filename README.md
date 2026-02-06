@@ -30,3 +30,8 @@ Completed By: Kathryn Woest (030131541) and Grace Flores (030169163)
 
 
 ## Example Commands and Outputs
+1. Command: `python graph.py --create_random_graph 20 0.5 --multi_BFS 1 2 --plot --output test.gml --analyze`
+2. Command: `python graph.py --create_random_graph 10 0.7 --plot --analyze`
+3. Command: `python graph.py --input test_file.gml --multi_BFS 1 --analyze --plot`
+
+Outputs for all are annotated in this PDF: https://pdflink.to/135575ca/
