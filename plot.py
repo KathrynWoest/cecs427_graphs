@@ -59,10 +59,10 @@ def plot(graph, isolated_nodes, highlight_edges=(), bfs_called=False):
                 edge["color"] = "#f4a261"
                 edge["width"] = 3
             else:
-                edge["color"] = "#d0d0d000"
+                edge["color"] = "#d0d0d0"
                 edge["width"] = 2
         else:
-            edge["color"] = "#d0d0d000"
+            edge["color"] = "#d0d0d0"
             edge["width"] = 2
             
         edge["smooth"] = {"type": "continuous"}
