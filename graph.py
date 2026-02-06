@@ -55,14 +55,27 @@ def main():
         
         # call the visualization function
         if "--plot" in args:
+            # set up the resulting BFS shortest_paths to be a set of edges for the plotting
+            if called_BFS:
+                bfs_edges = {}
+                edges = set()
+
+                # narrows it down to just srcs and their edges
+                for src, data in shortest_paths.items():
+                    bfs_edges[src] = data["edges"]
+
+                # flattens it down to just being a set of the edges
+                for edge_set in bfs_edges.values():
+                    edges.update(edge_set)
+
             # check to see which version of the plot to call based on what analysis/BFS was completed
             if called_BFS and called_analysis:
-                plot.plot(user_graph, analysis["isolated_nodes"], shortest_paths, called_BFS)
+                plot.plot(user_graph, analysis["isolated_nodes"], edges, called_BFS)
             elif not called_BFS and called_analysis:
                 plot.plot(user_graph, analysis["isolated_nodes"])
             elif called_BFS and not called_analysis:
                 analysis = analyze.analyze(user_graph)
-                plot.plot(user_graph, analysis["isolated_nodes"], shortest_paths, called_BFS)
+                plot.plot(user_graph, analysis["isolated_nodes"], edges, called_BFS)
         
         # call the output function
         if "--output" in args:
