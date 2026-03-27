@@ -34,4 +34,4 @@ Completed By: Kathryn Woest (030131541) and Grace Flores (030169163)
 2. Command: `python graph.py --create_random_graph 10 0.7 --plot --analyze`
 3. Command: `python graph.py --input test_file.gml --multi_BFS 1 --analyze --plot`
 
-Outputs for all are annotated in this PDF: https://pdflink.to/135575ca/
+Outputs for all are annotated in this PDF: [https://pdflink.to/135575ca/](https://pdflink.to/c1268bf0/)
